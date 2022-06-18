@@ -47,6 +47,17 @@ public class UserAtt {
         this.avatar = avatar;
     }
 
+    public UserAtt() {
+    }
+
+    public UserAtt(String id, String firstName, String lastName, String gender, String avatar) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.avatar = avatar;
+    }
+
     @Override
     public String toString() {
         return "UserAtt{" +
