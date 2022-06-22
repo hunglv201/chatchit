@@ -11,6 +11,7 @@ public class Users {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Integer id;
 
     @Column(name = "fbId")

@@ -25,7 +25,7 @@ public class StartChat {
         Users user = new Users();
         user.setFbId(req.getId());
         user.setFirstName(req.getFirstName());
-        user.setLastName(req.getFirstName());
+        user.setLastName(req.getLastName());
         user.setGender(req.getGender());
         user.setAvatar(req.getAvatar());
         userRepository.save(user);
