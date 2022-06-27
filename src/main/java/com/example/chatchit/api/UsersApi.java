@@ -1,5 +1,7 @@
 package com.example.chatchit.api;
 
+import com.example.chatchit.model.Users;
+import com.example.chatchit.repo.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
-public class TesrtsApi {
+public class UsersApi {
 
     private final UserRepository userRepository;
 

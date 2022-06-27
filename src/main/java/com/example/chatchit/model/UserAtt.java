@@ -1,4 +1,4 @@
-package com.example.chatchit.api;
+package com.example.chatchit.model;
 
 public class UserAtt {
     private String id;

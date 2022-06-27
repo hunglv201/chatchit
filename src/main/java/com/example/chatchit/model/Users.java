@@ -1,4 +1,4 @@
-package com.example.chatchit.api;
+package com.example.chatchit.model;
 
 import lombok.Data;
 
@@ -28,4 +28,16 @@ public class Users {
 
     @Column(name = "avatar")
     private String avatar;
+
+    @Column(name = "status")
+    private int status;
+
+    @Column(name = "connectId")
+    private String connectId;
+
+    @Column(name = "queue")
+    private int queue;
+
+    @Column(name = "blocked")
+    private int blocked;
 }
