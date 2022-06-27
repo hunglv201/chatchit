@@ -28,7 +28,7 @@ public class StartChat {
         logger.info(req.toString());
         Optional<Users> usedb = userRepository.findFirstByFbId(req.getId());
         if (usedb.isPresent()) {
-            randomConnectToUser(usedb.get());
+            return randomConnectToUser(usedb.get());
         }
 
         Users user = new Users();
