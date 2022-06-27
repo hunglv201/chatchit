@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class SendMessageService {
     public Boolean sendTexToMe(String mess) {
-        log.info("send messasge text ..............");
+        log.info("TO ME:---" + mess);
         return true;
     }
 
     public Boolean sendTexToOther(String mess) {
-        log.info("send messasge text ..............");
+        log.info("TO OTHOR: -----" + mess);
         return true;
     }
 }
