@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<Users, Integer> {
     Optional<Users> findFirstByFbId(String id);
 
-    Optional<Users> findFirstByQueueAndAndBlocked(int queue, int block);
+    Optional<Users> findFirstByQueueAndAndBlockedAndFbIdNotLike(int queue, int block, String id);
 }

@@ -49,7 +49,7 @@ public class StartChat {
             return sendMessageService.sendTexToMe("Bạn đã bị block bởi quản lý. liên kệ để mở mở lại tài khoản.");
         }
 
-        Optional<Users> usersConnect = userRepository.findFirstByQueueAndAndBlocked(1, 0);
+        Optional<Users> usersConnect = userRepository.findFirstByQueueAndAndBlockedAndFbIdNotLike(1, 0, userdb.getFbId());
         if (usersConnect.isPresent()) {
             Users u = usersConnect.get();
             userdb.setConnectId(u.getFbId());
