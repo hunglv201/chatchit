@@ -28,33 +28,7 @@ public class StartChat {
         logger.info(req.toString());
         Optional<Users> usedb = userRepository.findFirstByFbId(req.getId());
         if (usedb.isPresent()) {
-            Users userdb = usedb.get();
-            if (userdb.getConnectId() != null) {
-                return sendMessageService.sendTexToMe("Bạn đang trong cuộc trò chuyện. hãy kết thúc để bắt đầu cuộc trò chuyện mới!");
-            } else if (userdb.getBlocked() == 1) {
-                return sendMessageService.sendTexToMe("Bạn đã bị block bởi quản lý. liên kệ để mở mở lại tài khoản.");
-            }
-
-            Optional<Users> usersConnect = userRepository.findFirstByQueueAndAndBlocked(1, 0);
-            if (usersConnect.isPresent()) {
-                Users u = usersConnect.get();
-                userdb.setConnectId(u.getFbId());
-                userdb.setQueue(0);
-
-                u.setConnectId(userdb.getFbId());
-                u.setQueue(0);
-                userRepository.save(u);
-                userRepository.save(userdb);
-
-                sendMessageService.sendTexToMe("Bạn đã kết nối với người lạ có id :" + u.getFbId());
-                sendMessageService.sendTexToOther("Bạn đã kết nối với người lạ có id :" + u.getConnectId());
-            } else {
-                userdb.setQueue(1);
-                userRepository.save(userdb);
-                sendMessageService.sendTexToMe("Đang tìm kiếm ...");
-            }
-            return true;
-
+            randomConnectToUser(usedb.get());
         }
 
         Users user = new Users();
@@ -63,7 +37,36 @@ public class StartChat {
         user.setLastName(req.getLastName());
         user.setGender(req.getGender());
         user.setAvatar(req.getAvatar());
-        userRepository.save(user);
+        user = userRepository.save(user);
+        randomConnectToUser(user);
         return false;
+    }
+
+    private boolean randomConnectToUser(Users userdb ) {
+        if (userdb.getConnectId() != null) {
+            return sendMessageService.sendTexToMe("Bạn đang trong cuộc trò chuyện. hãy kết thúc để bắt đầu cuộc trò chuyện mới!");
+        } else if (userdb.getBlocked() == 1) {
+            return sendMessageService.sendTexToMe("Bạn đã bị block bởi quản lý. liên kệ để mở mở lại tài khoản.");
+        }
+
+        Optional<Users> usersConnect = userRepository.findFirstByQueueAndAndBlocked(1, 0);
+        if (usersConnect.isPresent()) {
+            Users u = usersConnect.get();
+            userdb.setConnectId(u.getFbId());
+            userdb.setQueue(0);
+
+            u.setConnectId(userdb.getFbId());
+            u.setQueue(0);
+            userRepository.save(u);
+            userRepository.save(userdb);
+
+            sendMessageService.sendTexToMe("Bạn đã kết nối với người lạ có id :" + u.getFbId());
+            sendMessageService.sendTexToOther("Bạn đã kết nối với người lạ có id :" + u.getConnectId());
+        } else {
+            userdb.setQueue(1);
+            userRepository.save(userdb);
+            sendMessageService.sendTexToMe("Đang tìm kiếm ...");
+        }
+        return true;
     }
 }
