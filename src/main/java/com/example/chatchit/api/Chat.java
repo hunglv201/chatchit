@@ -22,11 +22,11 @@ public class Chat {
 
    private static final Logger logger = LoggerFactory.getLogger(Chat.class);
 
-    @PostMapping("/sendchat")
+    @PostMapping("/sendChat")
     public SendChat startChat(SendChat req) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> res = restTemplate.getForEntity("http://localhost:8080/api/users", String.class);
-        logger.debug(res.toString());
+//        ResponseEntity<String> res = restTemplate.getForEntity("http://localhost:8080/api/users", String.class);
+//        logger.debug(res.toString());
         logger.info(req.toString());
         return req;
     }

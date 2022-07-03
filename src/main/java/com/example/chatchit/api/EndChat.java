@@ -28,13 +28,15 @@ public class EndChat {
 
     @PostMapping("/endChat")
     public Boolean startChat(@RequestParam String id) {
-        logger.info("end chat with id = {}" + id);
+        logger.info("end chat with id = {}" , id);
         Optional<Users> usedb = userRepository.findFirstByFbId(id);
         if (usedb.isPresent()) {
             if (usedb.get().getConnectId() != null) {
                 endChatForUser(usedb.get().getConnectId());
                 usedb.get().setConnectId(null);
                 userRepository.save(usedb.get());
+                sendMessageService.sendTexToMe("Bạn chưa kết được kết nối với người lạ id :" + usedb.get().getConnectId());
+                sendMessageService.sendTexToOther("Người lạ đã kết thúc trò chuyện với bạn id: " + id);
                 return true;
             } else {
                 sendMessageService.sendTexToMe("Bạn chưa kết được kết nối với người lạ");
